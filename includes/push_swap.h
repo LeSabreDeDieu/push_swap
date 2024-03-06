@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/26 16:28:43 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/06 13:38:30 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ bool	is_in_list(int value, int *tab);
 void	init_stack(t_stack *stack, char *argv[], char c);
 void	init_nodes(t_stack *a, t_stack *b);
 void	init_pos(t_stack *stack);
+void	reset_cost(t_stack *stack);
 
 //math
 int		min_of_stack(t_stack *stack);

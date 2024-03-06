@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/02/26 16:19:12 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/06 13:36:21 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJDIR		=	objs
 SRCS_SUBDIR	=	inits instruction stack tri
 SRCS		=	$(SRCDIR)/push_swap.c $(SRCDIR)/parsing.c $(SRCDIR)/median.c\
 				$(SRCDIR)/is_sorted.c $(SRCDIR)/math.c $(SRCDIR)/error.c \
-				$(SRCDIR)/inits/init_pos.c $(SRCDIR)/inits/init_stack.c\
+				$(SRCDIR)/inits/init_pos.c $(SRCDIR)/inits/init_stack.c $(SRCDIR)/inits/init_cost.c\
 				$(SRCDIR)/stack/clear_nodes.c $(SRCDIR)/stack/new_node.c \
 				$(SRCDIR)/stack/print_stack.c $(SRCDIR)/stack/push_back.c \
 				$(SRCDIR)/stack/push_front.c $(SRCDIR)/stack/push.c \
