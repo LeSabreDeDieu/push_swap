@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:07 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/08 15:43:56 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:09:22 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	verifie_double(char **tab)
 	while (tab[i] != NULL)
 	{
 		nombre = ft_atoi(tab[i]);
+		if (ft_itoa(nombre) != tab[i])
+			exit(6);
 		nombre_occurrences[nombre]++;
 		i++;
 	}
@@ -49,9 +51,7 @@ int	verifie_double(char **tab)
 	while (j < 1000)
 	{
 		if (nombre_occurrences[j] > 1)
-		{
 			return (1);
-		}
 		j++;
 	}
 	return (0);

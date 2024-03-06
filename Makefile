@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/02/08 15:33:58 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/02/26 16:19:12 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS		=	$(SRCDIR)/push_swap.c $(SRCDIR)/parsing.c $(SRCDIR)/median.c\
 				$(SRCDIR)/stack/swap.c $(SRCDIR)/stack/rotate.c \
 				$(SRCDIR)/instruction/push_command.c $(SRCDIR)/instruction/swap_command.c\
 				$(SRCDIR)/instruction/rotate_command.c \
-				$(SRCDIR)/tri/short_sort.c $(SRCDIR)/tri/sort.c
+				$(SRCDIR)/tri/short_sort.c $(SRCDIR)/tri/sort.c $(SRCDIR)/tri/cost_calc.c \
+				$(SRCDIR)/tri/three_biggest.c
 
 # Objects
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

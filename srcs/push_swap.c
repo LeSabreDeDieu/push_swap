@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:56:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/09 15:56:12 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:22:25 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	main(int argc, char *argv[])
 	{
 		if (a.size <= 3)
 			short_sort(&a);
+		else if (a.size <= 5)
+			short_sort_five(&a, &b);
 		else
 			sort(&a, &b);
 	}
-	print_stack(&a);
-	print_stack(&b);
 	clear_nodes(&a);
 	clear_nodes(&b);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/08 15:47:50 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:28:43 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ bool	is_sorted_descending(t_stack *stack);
 char	**parse_string(int argc, char **argv);
 int		mediane_des_medianes(int *tableau, int taille);
 int		*stack_to_tab(t_stack *stack);
+int		*get_three_biggest(t_stack *stack);
+bool	is_in_list(int value, int *tab);
 
 //inits
 void	init_stack(t_stack *stack, char *argv[], char c);
@@ -84,12 +86,15 @@ void	init_pos(t_stack *stack);
 //math
 int		min_of_stack(t_stack *stack);
 int		max_of_stack(t_stack *stack);
+bool	is_new_min_max(int value, t_stack *stack);
 t_node	*node_min(t_stack *stack);
 t_node	*node_max(t_stack *stack);
 
 //tri
 void	short_sort(t_stack *stack);
+void	short_sort_five(t_stack *a, t_stack *b);
 void	sort(t_stack *a, t_stack *b);
+void	set_cost(t_stack *src, t_stack *dest, bool ascend);
 
 //errors
 void	error(int erreur);

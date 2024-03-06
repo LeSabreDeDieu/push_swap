@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:44:42 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/07 13:21:03 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/02/26 11:34:02 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ int	max_of_stack(t_stack *stack)
 		current = current->next;
 	}
 	return (max);
+}
+
+bool	is_new_min_max(int value, t_stack *stack)
+{
+	if (value < min_of_stack(stack)
+		|| value > max_of_stack(stack))
+		return (true);
+	return (false);
 }
 
 t_node	*node_min(t_stack *stack)

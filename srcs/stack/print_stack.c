@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:19:32 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/09 15:56:01 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:53:17 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ void	print_stack(t_stack *stack)
 		while (current)
 		{
 			ft_printf("\t[%d] ", current->current_pos);
-			ft_printf("\t%d \n", current->value);
+			ft_printf("\t%d ", current->value);
+			ft_printf("| cost : %d ", current->cost);
+			if (current->target_node)
+				ft_printf("| target : %d \n", current->target_node->value);
+			else
+				ft_printf("\n");
 			current = current->next;
 		}
 	}

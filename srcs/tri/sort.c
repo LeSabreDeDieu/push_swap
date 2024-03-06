@@ -5,120 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 11:44:23 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/09 23:05:33 by sgabsi           ###   ########.fr       */
+/*   Created: 2024/01/25 16:54:54 by sgabsi            #+#    #+#             */
+/*   Updated: 2024/02/27 16:36:30 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*get_three_biggest(t_stack *stack)
+void	moov_node(t_stack *src, t_stack *dest, t_node *node)
 {
-	int		*tab;
-	t_node	*current;
+	while (node->cost > 1 && src->head != node
+		&& dest->head != node->target_node)
+	{
+		if (node->top_of_med && node->target_node->top_of_med)
+			rotate(src, dest, 'r');
+		else if (!(node->top_of_med && node->target_node->top_of_med))
+			rev_rotate(src, dest, 'r');
+		--node->cost;
+	}
+	while (node->cost > 1 && src->head != node)
+	{
+		if (node->top_of_med)
+			rotate(src, dest, src->name);
+		else if (!(node->top_of_med))
+			rev_rotate(src, dest, src->name);
+		--node->cost;
+	}
+	while (node->cost > 1 && dest->head != node->target_node)
+	{
+		if (node->target_node->top_of_med)
+			rotate(src, dest, dest->name);
+		else if (!(node->target_node->top_of_med))
+			rev_rotate(src, dest, dest->name);
+		--node->cost;
+	}
+}
 
-	tab = (int *)ft_calloc(3, sizeof(int));
-	tab[0] = min_of_stack(stack);
-	tab[1] = tab[0];
+t_node	*find_lowest_cost(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*lowest_cost_node;
+	int		lowest_cost;
+
 	current = stack->head;
+	lowest_cost = INT_MAX;
 	while (current)
 	{
-		if (current->value > tab[0])
+		if (current->cost <= 2)
+			return (current);
+		else if (current->cost <= lowest_cost)
 		{
-			tab[2] = tab[1];
-			tab[1] = tab[0];
-			tab[0] = current->value;
-		}
-		if (current->value > tab[1] && current->value != tab[0])
-		{
-			tab[2] = tab[1];
-			tab[1] = current->value;
-		}
-		if (current->value > tab[2] && current->value != tab[1])
-			tab[2] = current->value;
-		current = current->next;
-	}
-	return (tab);
-}
-
-bool	is_in_list(int value, int *tab)
-{
-	int i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (tab[i++] == value)
-			return (true);
-	}
-	return (false);
-}
-
-void	insert_val(t_stack *src, t_stack *dest)
-{
-	t_node *current;
-
-	if (src->head->value < dest->tail->value)
-	{
-		rev_rotate(src, dest, dest->name);
-		push(src, dest, dest->name);
-	}
-	else if (src->head->value > dest->head->value)
-	{
-		push(src, dest, dest->name);
-	}
-	else
-	{
-		current = dest->head;
-		if (src->head->value < current->value &&
-			src->head->value > current->next->value)
-		{
-			(rotate(src, dest, dest->name), push(src, dest, dest->name));
-		}
-		else
-			rotate(src, dest, dest->name);
-		while (!is_sorted_descending(dest))
-		{
-			rotate(src, dest, dest->name);
+			lowest_cost_node = current;
+			lowest_cost = current->cost;
 		}
 		current = current->next;
 	}
-}
-
-void	insert_sort(t_stack *src, t_stack *dest)
-{
-	int min;
-	int max;
-
-	if (dest->head == NULL)
-		return (push(src, dest, dest->name));
-	min = min_of_stack(dest);
-	max = max_of_stack(dest);
-	if (src->head->value < min)
-	{
-		push(src, dest, dest->name); 
-		rotate(src, dest, dest->name);
-	}
-	else if (src->head->value > max)
-		push(src, dest, dest->name);
-	else
-		insert_val(src, dest);
+	return (lowest_cost_node);
 }
 
 void	sort(t_stack *a, t_stack *b)
 {
-	int *max_values;
+	t_node	*lowest;
 
-	max_values = get_three_biggest(a);
+	push(a, b, b->name);
+	push(a, b, b->name);
 	while (a->size > 3)
 	{
-		if (!is_in_list(a->head->value, max_values))
-			insert_sort(a, b);
-		else
-			rotate(a, b, 'a');
+		set_cost(a, b, false);
+		lowest = find_lowest_cost(a);
+		if (lowest != b->head && lowest != b->tail)
+			moov_node(a, b, lowest);
+		push(a, b, b->name);
 	}
 	short_sort(a);
-	while (b->head)
+	/*while (b->head)
+	{
+		set_cost(b, a, true);
+		lowest = find_lowest_cost(a);
+		if (lowest != b->head && lowest != b->tail)
+			moov_node(b, a, lowest);
 		push(a, b, a->name);
-	free(max_values);
+	}*/
 }

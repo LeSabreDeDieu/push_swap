@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:50:14 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/08 15:47:10 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/02/26 11:34:23 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	*stack_to_tab(t_stack *stack)
 	{
 		tab[i++] = current->value;
 		current = current->next;
-	}	
+	}
 	return (tab);
 }
 
