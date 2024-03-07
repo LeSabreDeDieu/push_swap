@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:54:54 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/06 15:07:55 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:30:20 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	moov_node_ascend(t_stack *src, t_stack *dest, t_node *node)
 		else if (!(node->top_of_med || node->target_node->top_of_med))
 			rev_rotate(dest, src, 'r');
 	}
-	while (src->head != node && node->cost-- > 1 )
+	while (src->head != node && node->cost-- > 1)
 	{
 		if (node->top_of_med)
 			rotate(dest, src, src->name);
@@ -50,7 +50,7 @@ void	moov_node_descend(t_stack *src, t_stack *dest, t_node *node)
 		else if (!(node->top_of_med || node->target_node->top_of_med))
 			rev_rotate(src, dest, 'r');
 	}
-	while (src->head != node && node->cost-- > 1 )
+	while (src->head != node && node->cost-- > 1)
 	{
 		if (node->top_of_med)
 			rotate(src, dest, src->name);
@@ -88,12 +88,10 @@ t_node	*find_lowest_cost(t_stack *stack)
 	return (lowest_cost_node);
 }
 
-void	sort(t_stack *a, t_stack *b)
+void	traitment(t_stack *a, t_stack *b)
 {
 	t_node	*lowest;
 
-	push(a, b, b->name);
-	push(a, b, b->name);
 	while (a->size > 3)
 	{
 		reset_cost(a);
@@ -113,6 +111,13 @@ void	sort(t_stack *a, t_stack *b)
 			moov_node_ascend(b, a, lowest);
 		push(a, b, a->name);
 	}
+}
+
+void	sort(t_stack *a, t_stack *b)
+{
+	push(a, b, b->name);
+	push(a, b, b->name);
+	traitment(a, b);
 	while (!is_sorted_ascending(a))
 	{
 		if (node_max(a)->top_of_med)

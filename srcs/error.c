@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:24:04 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/08 15:44:40 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 10:48:35 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	error(int erreur)
 	exit(FAILURE);
 }
 
-void	tab_str_error(char **tab)
+void	free_str_tab(char **tab)
 {
 	size_t	i;
 
@@ -34,6 +34,11 @@ void	tab_str_error(char **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
+}
+
+void	tab_str_error(char **tab)
+{
+	free_str_tab(tab);
 	error(TAB_ERROR);
 }
 

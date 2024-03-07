@@ -6,11 +6,40 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:07 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/06 11:46:37 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 10:52:56 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	*ft_push_back(int *tab, int val)
+{
+	int		*temp_tab;
+	size_t	i;
+
+	if (tab == NULL)
+	{
+		temp_tab = ft_calloc(1, sizeof(int));
+		if (!temp_tab)
+			error(MALLOC_ERROR);
+		temp_tab[0] = val;
+	}
+	else
+	{
+		i = 0;
+		temp_tab = ft_calloc(tab_size(tab) + 1, sizeof(int));
+		if (!temp_tab)
+			error(MALLOC_ERROR);
+		while (i < tab_size(tab))
+		{
+			temp_tab[i] = tab[i];
+			i++;
+		}
+		free(tab);
+		temp_tab[i] = val;
+	}
+	return (temp_tab);
+}
 
 void	is_all_num(char **tab)
 {
@@ -33,28 +62,20 @@ void	is_all_num(char **tab)
 
 int	verifie_double(char **tab)
 {
-	static int	nombre_occurrences[1000] = {0};
-	int			i;
-	int			nombre;
-	int			j;
+	int		*tab_verif;
+	size_t	i;
 
+	tab_verif = NULL;
 	i = 0;
-	while (tab[i] != NULL)
+	while (tab[i])
 	{
-		nombre = ft_atoi(tab[i]);
-		/*if (ft_itoa(nombre) != tab[i])
-			exit(6);*/
-		nombre_occurrences[nombre]++;
+		if (is_in_tab(tab_verif, atoi(tab[i])))
+			return (free(tab_verif), true);
+		else
+			tab_verif = ft_push_back(tab_verif, atoi(tab[i]));
 		i++;
 	}
-	j = 0;
-	while (j < 1000)
-	{
-		if (nombre_occurrences[j] > 1)
-			return (1);
-		j++;
-	}
-	return (0);
+	return (free(tab_verif), false);
 }
 
 char	**parse_string(int argc, char **argv)
