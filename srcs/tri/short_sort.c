@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:35:01 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/26 15:14:57 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:46:50 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,17 @@ void	insert_min_max(t_stack *a, t_stack *b)
 
 void	short_sort_five(t_stack *a, t_stack *b)
 {
-	size_t	nb_push;
-
-	nb_push = 2;
 	while (a->size > 3)
 	{
 		push(a, b, b->name);
 	}
 	short_sort(a);
-	while (nb_push)
+	while (b->head)
 	{
 		if (is_new_min_max(b->head->value, a))
 			insert_min_max(a, b);
 		else if (b->head->value < a->head->value)
-			(push(a, b, 'a'), nb_push--);
+			push(a, b, 'a');
 		else
 			rotate(a, b, 'a');
 	}

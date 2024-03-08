@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:56:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/07 10:48:59 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 17:24:20 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ int	main(int argc, char *argv[])
 	if (argc < 2 || !argv[1][0])
 		usage();
 	argv++;
-	argv = parse_string(argc, argv);
+	argv = parse_string(argc - 1, argv);
 	init_stack(&a, argv, 'a');
 	init_stack(&b, NULL, 'b');
-	free_str_tab(argv);
+	if (argc == 2)
+		free_str_tab(argv);
 	if (!is_sorted_ascending(&a))
 	{
 		if (a.size <= 3)

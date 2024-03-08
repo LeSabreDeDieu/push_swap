@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:59 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/06 14:40:46 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 17:09:53 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_cost_min_max(t_stack *src, t_stack *dest, t_node *current_src,
 	}
 	else if (current_src->value > max_of_stack(dest) && ascend)
 	{
-		current_src->cost = cost_calc(src, dest, current_src, node_max(dest));
+		current_src->cost = cost_calc(src, dest, current_src, node_min(dest));
 		current_src->target_node = node_min(dest);
 	}
 	else if (current_src->value < min_of_stack(dest) && ascend)

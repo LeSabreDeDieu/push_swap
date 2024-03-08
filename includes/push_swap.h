@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/07 11:02:13 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/07 16:48:17 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,6 @@ typedef struct s_stack
 	size_t	size;
 }			t_stack;
 
-typedef struct s_array
-{
-	void	*val;
-	void	*head;
-	ssize_t	size;
-}			t_array;
-
 void	clear_nodes(t_stack *stack);
 void	print_stack(t_stack *stack);
 void	push_back(t_stack *stack, t_node *new);
@@ -80,8 +73,7 @@ void	usage(void);
 bool	is_sorted_ascending(t_stack *stack);
 bool	is_sorted_descending(t_stack *stack);
 char	**parse_string(int argc, char **argv);
-size_t	tab_size(int *tab);
-bool	is_in_tab(int *tab, int val);
+bool	is_in_tab(int *tab, int size, int val);
 void	free_str_tab(char **tab);
 
 //inits
