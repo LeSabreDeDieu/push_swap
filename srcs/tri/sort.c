@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:54:54 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/12 10:42:04 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:04:16 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,10 @@ void	traitment(t_stack *a, t_stack *b, int tab[3])
 void	sort(t_stack *a, t_stack *b)
 {
 	size_t	i;
-	size_t	j;
 	int		three_biggest[3];
 
 	i = 0;
-	j = 0;
 	get_three_biggest(three_biggest, a);
-	while (j++ < a->size)
-	{
-		if (max_of_stack(b)->top_of_med && !is_sorted_ascending(a))
-			rotate(a, b, a->name);
-		else if (!max_of_stack(b)->top_of_med && !is_sorted_ascending(a))
-			rev_rotate(a, b, a->name);
-	}
 	while (a->size > 3 && i < 2)
 	{
 		if (check_three_biggest(three_biggest, a->head->value))
