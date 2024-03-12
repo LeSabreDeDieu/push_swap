@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:35:01 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/07 15:46:50 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/08 15:41:31 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	short_sort(t_stack *stack)
 {
-	int	max;
-	int	size;
+	t_node	*max;
+	int		size;
 
 	max = max_of_stack(stack);
 	size = stack->size;
-	if (stack->head->value == max && size > 2)
+	if (stack->head->value == max->value && size > 2)
 		rotate(stack, NULL, 'a');
-	else if (stack->head->next->value == max && size > 2)
+	else if (stack->head->next->value == max->value && size > 2)
 		rev_rotate(stack, NULL, 'a');
 	if (stack->head->value > stack->head->next->value)
 		swap(stack, NULL, 'a');
@@ -33,7 +33,7 @@ void	insert_min_max(t_stack *a, t_stack *b)
 	int	temp_max;
 
 	temp = b->head->value;
-	temp_max = max_of_stack(a);
+	temp_max = max_of_stack(a)->value;
 	while (!is_sorted_ascending(a))
 		rotate(a, b, a->name);
 	push(a, b, 'a');
@@ -59,7 +59,7 @@ void	short_sort_five(t_stack *a, t_stack *b)
 	}
 	while (!is_sorted_ascending(a))
 	{
-		if (node_max(a)->top_of_med)
+		if (max_of_stack(a)->top_of_med)
 			rotate(a, b, 'a');
 		else
 			rev_rotate(a, b, 'a');

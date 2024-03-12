@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/07 16:48:17 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/11 11:22:43 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,29 @@ void	rev_rotate(t_stack *a, t_stack *b, char c);
 void	usage(void);
 bool	is_sorted_ascending(t_stack *stack);
 bool	is_sorted_descending(t_stack *stack);
-char	**parse_string(int argc, char **argv);
+int		*parse_string(int argc, char **argv);
 bool	is_in_tab(int *tab, int size, int val);
 void	free_str_tab(char **tab);
+void	get_three_biggest(int tab[3], t_stack *a);
+bool	check_three_biggest(int tab[3], int value);
 
 //inits
-void	init_stack(t_stack *stack, char *argv[], char c);
+void	init_stack(t_stack *stack, int *tab, int size, char c);
 void	init_nodes(t_stack *a, t_stack *b);
 void	init_pos(t_stack *stack);
 void	reset_cost(t_stack *stack);
 
 //math
-int		min_of_stack(t_stack *stack);
-int		max_of_stack(t_stack *stack);
+t_node	*min_of_stack(t_stack *stack);
+t_node	*max_of_stack(t_stack *stack);
 bool	is_new_min_max(int value, t_stack *stack);
-t_node	*node_min(t_stack *stack);
-t_node	*node_max(t_stack *stack);
 
 //tri
 void	short_sort(t_stack *stack);
 void	short_sort_five(t_stack *a, t_stack *b);
 void	sort(t_stack *a, t_stack *b);
-void	set_cost(t_stack *src, t_stack *dest, bool ascend);
+void	set_cost(t_stack *src, t_stack *dest);
+t_node	*find_lowest_cost(t_stack *src, t_stack *dest, int tab[3]);
 
 //errors
 void	error(int erreur);

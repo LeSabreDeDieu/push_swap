@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:56:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/07 17:24:20 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/11 12:35:11 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,17 @@ int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
+	int		*parsed;
 
 	if (argc < 2 || !argv[1][0])
 		usage();
 	argv++;
-	argv = parse_string(argc - 1, argv);
-	init_stack(&a, argv, 'a');
-	init_stack(&b, NULL, 'b');
-	if (argc == 2)
-		free_str_tab(argv);
+	parsed = parse_string(argc - 1, argv);
+	init_stack(&a, parsed, argc - 1, 'a');
+	init_stack(&b, NULL, 0, 'b');
+	free(parsed);
 	if (!is_sorted_ascending(&a))
-	{
-		if (a.size <= 3)
-			short_sort(&a);
-		else if (a.size <= 5)
-			short_sort_five(&a, &b);
-		else
-			sort(&a, &b);
-	}
+		sort(&a, &b);
 	clear_nodes(&a);
 	clear_nodes(&b);
 	return (SUCCESS);

@@ -6,90 +6,52 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:44:42 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/02/26 11:34:02 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/08 14:40:01 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	min_of_stack(t_stack *stack)
+t_node	*min_of_stack(t_stack *stack)
 {
-	int		min;
 	t_node	*current;
+	t_node	*min_node;
 
 	if (stack == NULL || stack->head == NULL)
-		return (INT_MIN);
+		return (NULL);
 	current = stack->head;
-	min = current->value;
+	min_node = NULL;
 	while (current)
 	{
-		if (current->value < min)
-			min = current->value;
+		if (!min_node || current->value < min_node->value)
+			min_node = current;
 		current = current->next;
 	}
-	return (min);
+	return (min_node);
 }
 
-int	max_of_stack(t_stack *stack)
+t_node	*max_of_stack(t_stack *stack)
 {
-	int		max;
 	t_node	*current;
+	t_node	*max_node;
 
 	if (stack == NULL || stack->head == NULL)
-		return (INT_MAX);
+		return (NULL);
 	current = stack->head;
-	max = current->value;
+	max_node = NULL;
 	while (current)
 	{
-		if (current->value > max)
-			max = current->value;
+		if (!max_node || current->value > max_node->value)
+			max_node = current;
 		current = current->next;
 	}
-	return (max);
+	return (max_node);
 }
 
 bool	is_new_min_max(int value, t_stack *stack)
 {
-	if (value < min_of_stack(stack)
-		|| value > max_of_stack(stack))
+	if (value < min_of_stack(stack)->value
+		|| value > max_of_stack(stack)->value)
 		return (true);
 	return (false);
-}
-
-t_node	*node_min(t_stack *stack)
-{
-	t_node	*current;
-	t_node	*min;
-
-	current = stack->head;
-	min = NULL;
-	while (current)
-	{
-		if (current->value == min_of_stack(stack))
-		{
-			min = current;
-			break ;
-		}
-		current = current->next;
-	}
-	return (min);
-}
-
-t_node	*node_max(t_stack *stack)
-{
-	t_node	*current;
-	t_node	*max;
-
-	current = stack->head;
-	max = NULL;
-	while (current)
-	{
-		if (current->value == max_of_stack(stack))
-		{
-			max = current;
-			break ;
-		}
-		current = current->next;
-	}
-	return (max);
 }
