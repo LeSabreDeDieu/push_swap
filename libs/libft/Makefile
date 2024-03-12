@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 13:44:09 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/12 11:46:37 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/12 11:50:52 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,12 +80,12 @@ so:
 	gcc -nostartfiles -shared -o libft.so $(OBJ) $(BOBJ)
 
 pre_comp :
-	@echo -e "$(YELLOW)********* Début de la compilation de la librairie Libft *********$(NC)"
+	@echo "$(YELLOW)********* Début de la compilation de la librairie Libft *********$(NC)"
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
-	@echo -e "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)\033[K"
-	@echo -e "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
+	@echo "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)\033[K"
+	@echo "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -104,7 +104,7 @@ clean:
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@/bin/rm -f $(NAMESO) a.out
-	@echo -e "$(RED)********* Suppression de la librairie $(NAME) *********$(NC)"
+	@echo "$(RED)********* Suppression de la librairie $(NAME) *********$(NC)"
 	
 re: fclean all
 
