@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/12 11:18:48 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/12 11:43:51 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,10 @@ COUNT		=	1
 TOTAL_FILES	=	$(shell find ./srcs -type f -name "*.c" | wc -l)
 
 # Colors
-GREEN		=	$(echo -e "\033[0;32m")
-YELLOW		=	$(echo -e "\033[0;33m")
-RED			=	$(echo -e "\033[0;31m")
-NC			=	$(echo -e "\033[0m")
+RED			=	\033[0;31m
+GREEN		=	\033[0;32m
+YELLOW		=	\033[0;33m
+END			=	\033[0m
 
 #################
 ##  TARGETS    ##
@@ -67,12 +67,12 @@ NC			=	$(echo -e "\033[0m")
 all: pre_comp $(NAME)
 
 pre_comp :
-	@echo "$(YELLOW)********* Début de la compilation du programme $(NAME) *********$(NC)"
+	@echo -e "$(YELLOW)********* Début de la compilation du programme $(NAME) *********$(NC)"
 	
 $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(OBJS) $(CFLAGS) $(OPTIONS) $(LFLAGS) -o $@
-	@echo "$(GREEN)********* Compilation terminée avec succès! *********$(NC)"
-	@echo "$(GREEN)********* L'executable $(NAME) a été créée. *********$(NC)"
+	@echo -e "$(GREEN)********* Compilation terminée avec succès! *********$(NC)"
+	@echo -e "$(GREEN)********* L'executable $(NAME) a été créée. *********$(NC)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
@@ -84,13 +84,13 @@ $(LIBFT):
 clean:
 	@rm -rf $(OBJDIR)
 	@make -sC $(LIBFT_DIR) clean
-	@echo "$(YELLOW)********* Suppression des fichiers objets *********$(NC)"
+	@echo -e "$(YELLOW)********* Suppression des fichiers objets *********$(NC)"
 
 fclean: clean
 	@rm -f $(NAME)
 	@/bin/rm -f $(NAMESO) a.out
 	@make -sC $(LIBFT_DIR) fclean
-	@echo "$(RED)********* Suppression de l'executable $(NAME) *********$(NC)"
+	@echo -e "$(RED)********* Suppression de l'executable $(NAME) *********$(NC)"
 
 re: fclean all
 

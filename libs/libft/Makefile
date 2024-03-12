@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 13:44:09 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/12 11:30:50 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/12 11:46:37 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,10 +64,10 @@ COUNT		=	1
 TOTAL_FILES	=	$(shell find . -type f -name "*.c" | wc -l)
 
 # Colors
-GREEN		=	$(echo -e "\033[0;32m")
-YELLOW		=	$(echo -e "\033[0;33m")
-RED			=	$(echo -e "\033[0;31m")
-NC			=	$(echo -e "\033[0m")
+GREEN		=	\033[0;32m
+RED			=	\033[0;31m
+YELLOW		=	\033[0;33m
+END			=	\033[0m
 
 #################
 ##  TARGETS    ##
@@ -80,17 +80,12 @@ so:
 	gcc -nostartfiles -shared -o libft.so $(OBJ) $(BOBJ)
 
 pre_comp :
-	@echo "$(YELLOW)********* Début de la compilation de la librairie Libft *********$(NC)"
+	@echo -e "$(YELLOW)********* Début de la compilation de la librairie Libft *********$(NC)"
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 	@echo -e "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)\033[K"
-	@echo "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
-	
-bonus: $(OBJ) $(BOBJ)
-	@ar rcs $(NAME) $(OBJ) $(BOBJ)
-	@echo "$(GREEN)**** Compilation des bonus terminée avec succès! ****$(NC)"
-	@echo "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
+	@echo -e "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -105,12 +100,11 @@ $(OBJDIR)/%.o: %.c
 
 clean:
 	@/bin/rm -rf $(OBJDIR)
-	@echo "$(YELLOW)********* Suppression des fichiers objets *********$(NC)"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@/bin/rm -f $(NAMESO) a.out
-	@echo "$(RED)********* Suppression de la librairie $(NAME) *********$(NC)"
+	@echo -e "$(RED)********* Suppression de la librairie $(NAME) *********$(NC)"
 	
 re: fclean all
 
