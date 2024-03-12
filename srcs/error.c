@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:24:04 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/07 10:48:35 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:10:51 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	error(int erreur)
 {
-	write(2, "Error\n", 6);
+	ft_putstr_fd("Error\n", 2);
 	if (erreur == FAILURE)
-		write(2, "Erreur inconnu\n", 15);
+		ft_putstr_fd("Erreur inconnu\n", 2);
 	if (erreur == MALLOC_ERROR)
-		write(2, "Erreur de malloc\n", 17);
+		ft_putstr_fd("Erreur de malloc\n", 2);
 	if (erreur == TAB_ERROR)
-		write(2, "Erreur lors de la creation du tableau\n", 38);
+		ft_putstr_fd("Erreur lors de la creation du tableau\n", 2);
 	if (erreur == TYPE_ERROR)
-		write(2, "Erreur lors de la saisie\n", 25);
+		ft_putstr_fd("Erreur lors de la saisie\n", 2);
 	exit(FAILURE);
 }
 
@@ -42,8 +42,13 @@ void	tab_str_error(char **tab)
 	error(TAB_ERROR);
 }
 
-void	tab_int_error(int *tab)
+void	free_int_tab(int *tab)
 {
 	free(tab);
+}
+
+void	tab_int_error(int *tab)
+{
+	free_int_tab(tab);
 	error(TAB_ERROR);
 }

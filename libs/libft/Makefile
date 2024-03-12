@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 13:44:09 by sgabsi            #+#    #+#              #
-#    Updated: 2024/01/24 13:44:10 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/12 11:30:50 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,8 +84,7 @@ pre_comp :
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
-	@printf "\r% 200s"
-	@echo "$(GREEN)********* Compilation terminée avec succès! *********$(NC)"
+	@echo -e "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)\033[K"
 	@echo "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
 	
 bonus: $(OBJ) $(BOBJ)

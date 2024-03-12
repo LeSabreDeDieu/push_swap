@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/11 11:22:43 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:17:52 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ enum e_error
 	TYPE_ERROR
 };
 
-//stack struct with his functions
+// ===================================================
+
+/**les structures utilisees par les stacks
+ * et leurs fonctions : 
+*/
 typedef struct s_node
 {
 	int				value;
@@ -58,47 +62,53 @@ void	rev_rotate_stack(t_stack *stack);
 void	swap_stack(t_stack *stack);
 t_node	*new_node(int content);
 
-//instructions
-//push
+//====================== instructions ======================
+
 void	push(t_stack *a, t_stack *b, char c);
-//swap
 void	swap(t_stack *a, t_stack *b, char c);
-//rotate
 void	rotate(t_stack *a, t_stack *b, char c);
-//reverse rotate
 void	rev_rotate(t_stack *a, t_stack *b, char c);
 
-//utils
+//========================= utils ==========================
+
+int		*parse_string(int argc, char **argv);
 void	usage(void);
+void	get_three_biggest(int tab[3], t_stack *a);
 bool	is_sorted_ascending(t_stack *stack);
 bool	is_sorted_descending(t_stack *stack);
-int		*parse_string(int argc, char **argv);
 bool	is_in_tab(int *tab, int size, int val);
-void	free_str_tab(char **tab);
-void	get_three_biggest(int tab[3], t_stack *a);
 bool	check_three_biggest(int tab[3], int value);
 
-//inits
+//========================= inits =========================
+
 void	init_stack(t_stack *stack, int *tab, int size, char c);
 void	init_nodes(t_stack *a, t_stack *b);
 void	init_pos(t_stack *stack);
 void	reset_cost(t_stack *stack);
 
-//math
+//========================= math ==========================
+
 t_node	*min_of_stack(t_stack *stack);
 t_node	*max_of_stack(t_stack *stack);
 bool	is_new_min_max(int value, t_stack *stack);
 
-//tri
+//========================= tri ===========================
+
 void	short_sort(t_stack *stack);
 void	short_sort_five(t_stack *a, t_stack *b);
 void	sort(t_stack *a, t_stack *b);
 void	set_cost(t_stack *src, t_stack *dest);
 t_node	*find_lowest_cost(t_stack *src, t_stack *dest, int tab[3]);
 
-//errors
+//========================= errors ========================
+
 void	error(int erreur);
 void	tab_str_error(char **tab);
 void	tab_int_error(int *tab);
+
+//========================= free ==========================
+
+void	free_str_tab(char **tab);
+void	free_int_tab(int *tab);
 
 #endif
