@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:54:54 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/11 12:24:41 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/12 10:24:30 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void	sort(t_stack *a, t_stack *b)
 
 	i = 0;
 	get_three_biggest(three_biggest, a);
+	if (min_of_stack(a) == a->tail)
+	{
+		rev_rotate(a, b, a->name);
+		return ;
+	}
 	while (a->size > 3 && i < 2)
 	{
 		if (check_three_biggest(three_biggest, a->head->value))
