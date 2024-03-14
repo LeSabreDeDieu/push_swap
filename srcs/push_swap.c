@@ -6,14 +6,14 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:56:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/12 10:50:15 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:04:00 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	usage(void)
+static void	usage(void)
 {
 	ft_printf("Usage : ./push_swap \"[list of int]\" or ");
 	ft_printf("./push_swap [list of int]\n");

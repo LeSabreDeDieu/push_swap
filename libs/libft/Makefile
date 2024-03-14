@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 13:44:09 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/12 11:50:52 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/14 12:18:59 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ TOTAL_FILES	=	$(shell find . -type f -name "*.c" | wc -l)
 GREEN		=	\033[0;32m
 RED			=	\033[0;31m
 YELLOW		=	\033[0;33m
-END			=	\033[0m
+NC			=	\033[0m
+KL			=	\033[K
 
 #################
 ##  TARGETS    ##
@@ -84,13 +85,13 @@ pre_comp :
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
-	@echo "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)\033[K"
+	@echo "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)$(KL)"
 	@echo "$(GREEN)********* La librairie $(NAME) a été créée. *********$(NC)"
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(OPTIONS) -o $@ -c $<
-	@printf "\rCompiling files: [%-50s] %3d%% (%d/%d) %s % 10s" \
+	@printf "$(NC)\rCompiling files: [%-50s] %3d%% (%d/%d) %s$(KL)" \
 		"$(shell printf '=%.0s' $$(seq 1 $$(($(COUNT) * 50 / $(TOTAL_FILES)))))" \
 		$$(($(COUNT) * 100 / $(TOTAL_FILES))) \
 		$(COUNT) \

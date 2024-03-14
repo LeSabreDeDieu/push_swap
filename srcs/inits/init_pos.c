@@ -6,13 +6,13 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:28:34 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/06 14:06:06 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:02:15 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_top_of_med(t_stack *stack)
+static void	init_top_of_med(t_stack *stack)
 {
 	int		med;
 	t_node	*current;
@@ -29,7 +29,7 @@ void	init_top_of_med(t_stack *stack)
 	}
 }
 
-void	init_current_pos(t_stack *stack)
+static void	init_current_pos(t_stack *stack)
 {
 	size_t	index;
 	t_node	*current;

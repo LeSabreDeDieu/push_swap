@@ -6,13 +6,13 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:07 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/11 12:37:41 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:59:25 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	is_all_num(char **tab)
+static void	is_all_num(char **tab)
 {
 	size_t	i;
 	size_t	j;
@@ -21,11 +21,16 @@ void	is_all_num(char **tab)
 	while (tab[i])
 	{
 		j = 0;
+		if (!ft_isdigit(tab[i][0]) && !(tab[i][0] == '-' || tab[i][0] == '+'))
+			error(TYPE_ERROR);
+		if (tab[i][0] == '-')
+			j++;
 		while (tab[i][j])
 		{
-			if (!ft_isdigit(tab[i][j])
-			&& tab[i][j] != '-'
-			&& tab[i][j] != '+')
+			if (!ft_isdigit(tab[i][j]))
+				error(TYPE_ERROR);
+			if (ft_isdigit(tab[i][j]) && !ft_isdigit(tab[i][j + 1]) && tab[i][j
+				+ 1] != '\0')
 				error(TYPE_ERROR);
 			j++;
 		}
@@ -33,7 +38,7 @@ void	is_all_num(char **tab)
 	}
 }
 
-int	verifie_double(int *tab, int argc)
+static int	verifie_double(int *tab, int argc)
 {
 	int	i;
 	int	j;
@@ -53,10 +58,56 @@ int	verifie_double(int *tab, int argc)
 	return (false);
 }
 
+static int	check_overflow(const char *str, int *val)
+{
+	long long	num;
+	int			sign;
+	int			i;
+
+	num = 0;
+	sign = 1;
+	i = 0;
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while (str[i] != '\0')
+	{
+		num = num * 10 + (str[i] - '0');
+		if (sign * num > INT_MAX || sign * num < INT_MIN)
+			return (1);
+		i++;
+	}
+	*val = num;
+	return (0);
+}
+
+static void	check(char **argv, int argc, int **tab)
+{
+	int	i;
+	int	num;
+
+	i = 0;
+	num = 0;
+	is_all_num(argv);
+	(*tab) = ft_calloc(argc, sizeof(int));
+	while (i < argc)
+	{
+		if (check_overflow(argv[i], &num) == 1)
+			(free((*tab)), error(INT_OVERFLOW));
+		(*tab)[i] = num;
+		i++;
+	}
+	if (verifie_double((*tab), argc))
+		(free((*tab)), error(TYPE_ERROR));
+}
+
 int	*parse_string(int argc, char **argv)
 {
 	int	*tab;
-	int	i;
 
 	if (argc == 1)
 	{
@@ -67,15 +118,7 @@ int	*parse_string(int argc, char **argv)
 		while (argv[argc])
 			argc++;
 	}
-	i = 0;
-	is_all_num(argv);
-	tab = ft_calloc(argc, sizeof(int));
-	while (i < argc)
-	{
-		tab[i] = ft_atoi(argv[i]);
-		i++;
-	}
-	if (verifie_double(tab, argc))
-		(free(tab), error(TYPE_ERROR));
+	tab = NULL;
+	check(argv, argc, &tab);
 	return (tab);
 }

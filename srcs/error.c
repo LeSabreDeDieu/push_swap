@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:24:04 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/12 11:10:51 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:37:16 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	error(int erreur)
 		ft_putstr_fd("Erreur lors de la creation du tableau\n", 2);
 	if (erreur == TYPE_ERROR)
 		ft_putstr_fd("Erreur lors de la saisie\n", 2);
+	if (erreur == INT_OVERFLOW)
+		ft_putstr_fd("Erreur : un des nombre saisie depasse la valeur de INT\n",
+			2);
 	exit(FAILURE);
 }
 

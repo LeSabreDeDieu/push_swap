@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:58 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/12 11:17:52 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:04:18 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ enum e_error
 	FAILURE,
 	MALLOC_ERROR,
 	TAB_ERROR,
-	TYPE_ERROR
+	TYPE_ERROR,
+	INT_OVERFLOW
 };
 
 // ===================================================
@@ -72,7 +73,6 @@ void	rev_rotate(t_stack *a, t_stack *b, char c);
 //========================= utils ==========================
 
 int		*parse_string(int argc, char **argv);
-void	usage(void);
 void	get_three_biggest(int tab[3], t_stack *a);
 bool	is_sorted_ascending(t_stack *stack);
 bool	is_sorted_descending(t_stack *stack);
