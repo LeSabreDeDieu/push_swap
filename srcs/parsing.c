@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:07 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/14 11:59:25 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:44:42 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ static int	check_overflow(const char *str, int *val)
 		i++;
 	}
 	*val = num;
+	if (sign < 0)
+		(*val) *= sign;
 	return (0);
 }
 
