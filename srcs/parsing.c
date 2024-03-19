@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:12:07 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/14 13:54:23 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/19 08:46:34 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,40 +87,44 @@ static int	check_overflow(const char *str, int *val)
 	return (0);
 }
 
-static void	check(char **argv, int argc, int **tab)
+static void	check(char **tab_char, int size, int **tab_int)
 {
 	int	i;
 	int	num;
 
 	i = 0;
 	num = 0;
-	is_all_num(argv);
-	(*tab) = ft_calloc(argc, sizeof(int));
-	while (i < argc)
+	is_all_num(tab_char);
+	(*tab_int) = ft_calloc(size, sizeof(int));
+	while (i < size)
 	{
-		if (check_overflow(argv[i], &num) == 1)
-			(free((*tab)), error(INT_OVERFLOW));
-		(*tab)[i] = num;
+		if (check_overflow(tab_char[i], &num) == 1)
+			(free((*tab_int)), error(INT_OVERFLOW));
+		(*tab_int)[i] = num;
 		i++;
 	}
-	if (verifie_double((*tab), argc))
-		(free((*tab)), error(TYPE_ERROR));
+	if (verifie_double((*tab_int), size))
+		(free((*tab_int)), error(TYPE_ERROR));
 }
 
-int	*parse_string(int argc, char **argv)
+t_array	parse_string(int argc, char **argv)
 {
-	int	*tab;
+	t_array	parse;
+	char	**tab;
 
+	parse.tab = NULL;
+	tab = NULL;
 	if (argc == 1)
 	{
-		argv = ft_split(*argv, ' ');
-		if (!argv)
+		parse.size = 0;
+		tab = ft_split(*argv, ' ');
+		if (!tab)
 			tab_str_error(argv);
-		argc = 0;
-		while (argv[argc])
-			argc++;
+		while (tab[parse.size])
+			parse.size++;
 	}
-	tab = NULL;
-	check(argv, argc, &tab);
-	return (tab);
+	else
+		parse.size = argc;
+	check(tab, parse.size, &(parse.tab));
+	return (parse);
 }

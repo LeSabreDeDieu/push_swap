@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/18 14:40:12 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/19 08:21:50 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS_SUBDIR	=	inits instruction stack tri
 SRCDIR		=	./srcs
 INCDIR		=	./includes
 LIBDIR		=	./libs
-OBJDIR		=	objs 
+OBJDIR		=	objs
 
 # Sources
 # init
@@ -28,14 +28,14 @@ SRCS_INIT_LIST	=	init_pos.c		\
 					init_stack.c
 SRCS_INIT		=	$(addprefix $(SRCS_INIT_DIR)/, $(SRCS_INIT_LIST))
 
-#instruction
+# instruction
 SRCS_INST_DIR	=	instruction
 SRCS_INST_LIST	=	push_command.c	\
 					rotate_command.c\
 					swap_command.c
 SRCS_INST		=	$(addprefix $(SRCS_INST_DIR)/, $(SRCS_INST_LIST))
 
-#stack
+# stack
 SRCS_STACK_DIR	=	stack
 SRCS_STACK_LIST	=	clear_nodes.c	\
 					new_node.c		\
@@ -47,7 +47,7 @@ SRCS_STACK_LIST	=	clear_nodes.c	\
 					swap.c
 SRCS_STACK		=	$(addprefix $(SRCS_STACK_DIR)/, $(SRCS_STACK_LIST))
 
-#tri
+# tri
 SRCS_TRI_DIR	=	tri
 SRCS_TRI_LIST	=	cost_calc.c		\
 					short_sort.c	\
@@ -55,7 +55,7 @@ SRCS_TRI_LIST	=	cost_calc.c		\
 					three_biggest.c
 SRCS_TRI		=	$(addprefix $(SRCS_TRI_DIR)/, $(SRCS_TRI_LIST))
 
-#racine
+# racine
 SRCS_LIST		=	error.c			\
 					is_sorted.c		\
 					math.c			\
@@ -64,7 +64,7 @@ SRCS_LIST		=	error.c			\
 					$(SRCS_INIT)	\
 					$(SRCS_INST)	\
 					$(SRCS_STACK)	\
-					$(SRC_TRI)
+					$(SRCS_TRI)
 
 SRCS			=	$(addprefix $(SRCDIR)/, $(SRCS_LIST))
 
@@ -84,7 +84,7 @@ CFLAGS		=	-Wall -Werror -Wextra
 OPTIONS		=	-I $(INCDIR) -I $(LIBFT_DIR)/$(INCDIR)
 LFLAGS		=	-L $(LIBFT_DIR) -lft
 
-#Progress bar
+# Progress bar
 COUNT		=	1
 TOTAL_FILES	=	$(shell find ./srcs -type f -name "*.c" | wc -l)
 
@@ -103,10 +103,10 @@ all: pre_comp $(NAME)
 
 pre_comp :
 	@echo "$(YELLOW)********* Début de la compilation du programme $(NAME) *********$(NC)"
-	
-$(NAME):$(LIBFT) $(OBJS)
+
+$(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(OBJS) $(CFLAGS) $(OPTIONS) $(LFLAGS) -o $@
-	@echo "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)$(KL)"
+	@echo -e "\r$(GREEN)********* Compilation terminée avec succès! *********$(NC)$(KL)"
 	@echo "$(GREEN)********* L'executable $(NAME) a été créée. *********$(NC)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
@@ -130,7 +130,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@/bin/rm -f $(NAMESO) a.out
 	@make -sC $(LIBFT_DIR) fclean
 	@echo "$(RED)********* Suppression de l'executable $(NAME) *********$(NC)"
 
