@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/14 12:19:15 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/18 14:40:12 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,58 @@
 #################
 
 # Directories
+SRCS_SUBDIR	=	inits instruction stack tri
 SRCDIR		=	./srcs
 INCDIR		=	./includes
 LIBDIR		=	./libs
-OBJDIR		=	objs
+OBJDIR		=	objs 
 
 # Sources
-SRCS_SUBDIR	=	inits instruction stack tri
-SRCS		=	$(SRCDIR)/push_swap.c $(SRCDIR)/parsing.c $(SRCDIR)/is_sorted.c $(SRCDIR)/math.c $(SRCDIR)/error.c \
-				$(SRCDIR)/inits/init_pos.c $(SRCDIR)/inits/init_stack.c \
-				$(SRCDIR)/instruction/push_command.c $(SRCDIR)/instruction/swap_command.c $(SRCDIR)/instruction/rotate_command.c \
-				$(SRCDIR)/stack/clear_nodes.c $(SRCDIR)/stack/new_node.c $(SRCDIR)/stack/print_stack.c $(SRCDIR)/stack/push_back.c \
-					$(SRCDIR)/stack/push_front.c $(SRCDIR)/stack/push.c $(SRCDIR)/stack/swap.c $(SRCDIR)/stack/rotate.c \
-				$(SRCDIR)/tri/short_sort.c $(SRCDIR)/tri/sort.c $(SRCDIR)/tri/cost_calc.c $(SRCDIR)/tri/three_biggest.c
+# init
+SRCS_INIT_DIR	=	inits
+SRCS_INIT_LIST	=	init_pos.c		\
+					init_stack.c
+SRCS_INIT		=	$(addprefix $(SRCS_INIT_DIR)/, $(SRCS_INIT_LIST))
+
+#instruction
+SRCS_INST_DIR	=	instruction
+SRCS_INST_LIST	=	push_command.c	\
+					rotate_command.c\
+					swap_command.c
+SRCS_INST		=	$(addprefix $(SRCS_INST_DIR)/, $(SRCS_INST_LIST))
+
+#stack
+SRCS_STACK_DIR	=	stack
+SRCS_STACK_LIST	=	clear_nodes.c	\
+					new_node.c		\
+					print_stack.c	\
+					push_back.c		\
+					push_front.c	\
+					push.c			\
+					rotate.c		\
+					swap.c
+SRCS_STACK		=	$(addprefix $(SRCS_STACK_DIR)/, $(SRCS_STACK_LIST))
+
+#tri
+SRCS_TRI_DIR	=	tri
+SRCS_TRI_LIST	=	cost_calc.c		\
+					short_sort.c	\
+					sort.c			\
+					three_biggest.c
+SRCS_TRI		=	$(addprefix $(SRCS_TRI_DIR)/, $(SRCS_TRI_LIST))
+
+#racine
+SRCS_LIST		=	error.c			\
+					is_sorted.c		\
+					math.c			\
+					parsing.c		\
+					push_swap.c		\
+					$(SRCS_INIT)	\
+					$(SRCS_INST)	\
+					$(SRCS_STACK)	\
+					$(SRC_TRI)
+
+SRCS			=	$(addprefix $(SRCDIR)/, $(SRCS_LIST))
 
 # Objects
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

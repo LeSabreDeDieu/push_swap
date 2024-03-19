@@ -6,14 +6,14 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:54:54 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/12 11:17:59 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:57:54 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	moov_node(t_stack *src, t_stack *dest, t_node *node)
+static void	moov_node(t_stack *src, t_stack *dest, t_node *node)
 {
 	while (src->head != node && dest->head != node->target_node
 		&& node->top_of_med == node->target_node->top_of_med
@@ -40,7 +40,7 @@ void	moov_node(t_stack *src, t_stack *dest, t_node *node)
 	}
 }
 
-void	traitment(t_stack *a, t_stack *b, int tab[3])
+static void	traitment(t_stack *a, t_stack *b, int tab[3])
 {
 	t_node	*lowest;
 
