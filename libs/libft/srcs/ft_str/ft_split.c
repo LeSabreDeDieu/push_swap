@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:32:04 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/19 08:36:45 by sgabsi           ###   ########.fr       */
+/*   Updated: 2023/11/16 13:08:10 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static void	ft_clear(char **tab, int indice)
 
 	i = 0;
 	while (i <= indice)
-		free(tab[i++]);
+	{
+		tab[i] = NULL;
+		free(tab[i]);
+	}
 }
 
 static char	**ft_fill(const char *s, char c, char **result, size_t *word_len)
