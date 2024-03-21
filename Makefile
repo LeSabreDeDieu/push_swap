@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/19 08:21:50 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/03/21 13:31:10 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,5 +134,9 @@ fclean: clean
 	@echo "$(RED)********* Suppression de l'executable $(NAME) *********$(NC)"
 
 re: fclean all
+
+norminette:
+	@echo "$(YELLOW)********* Exécution de norminette *********$(NC)"
+	@norminette | grep -B 1 -e "Error" || echo "Tous les fichiers ont passé le check norminette !"
 
 .PHONY: all clean fclean re
