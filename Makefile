@@ -6,7 +6,7 @@
 #    By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 16:28:59 by sgabsi            #+#    #+#              #
-#    Updated: 2024/03/21 13:31:10 by sgabsi           ###   ########.fr        #
+#    Updated: 2024/04/02 16:19:14 by sgabsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS_TRI_DIR	=	tri
 SRCS_TRI_LIST	=	cost_calc.c		\
 					short_sort.c	\
 					sort.c			\
-					three_biggest.c
+					create_chunk.c
 SRCS_TRI		=	$(addprefix $(SRCS_TRI_DIR)/, $(SRCS_TRI_LIST))
 
 # racine
@@ -80,7 +80,7 @@ NAME		=	push_swap
 
 # Compiler
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra -g3
 OPTIONS		=	-I $(INCDIR) -I $(LIBFT_DIR)/$(INCDIR)
 LFLAGS		=	-L $(LIBFT_DIR) -lft
 

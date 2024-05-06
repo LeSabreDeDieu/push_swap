@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:59 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/11 15:00:21 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:34:30 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,53 +30,44 @@ int	cost_calc(t_stack *src, t_stack *dest, t_node *node, t_node *target_node)
 
 void	set_cost_min_max(t_stack *src, t_stack *dest, t_node *current_src)
 {
-	t_node	*max;
+	t_node	*min;
 
-	max = max_of_stack(dest);
-	if (current_src->value > max->value)
-	{
-		current_src->cost = cost_calc(src, dest, current_src, max);
-		current_src->target_node = max;
-	}
-	else if (current_src->value < min_of_stack(dest)->value)
-	{
-		current_src->cost = cost_calc(src, dest, current_src, max);
-		current_src->target_node = max;
-	}
+	min = min_of_stack(dest);
+	current_src->cost = cost_calc(src, dest, current_src, min);
+	current_src->target_node = min;
 }
 
 void	set_cost_target(t_stack *src, t_stack *dest,
 		t_node *current_src, t_node *current_dest)
 {
-	if (current_src->cost > 2 || current_src->cost == 0)
+	if (current_src->cost > 2)
 	{
-		if (current_src->value > dest->head->value
-			&& current_src->value < dest->tail->value)
-		{
-			current_src->cost = cost_calc(src, dest, current_src, dest->head);
-			current_src->target_node = dest->head;
-		}
-		else if (current_src->value > current_dest->next->value
-			&& current_src->value < current_dest->value)
+		if (current_src->value < current_dest->next->value
+			&& current_src->value > current_dest->value)
 		{
 			current_src->cost = cost_calc(src, dest, current_src,
 					current_dest->next);
 			current_src->target_node = current_dest->next;
 		}
+		else if (current_src->value > dest->tail->value
+			&& current_src->value < dest->head->value)
+		{
+			current_src->cost = cost_calc(src, dest, current_src,
+					dest->head);
+			current_src->target_node = dest->head;
+		}
 	}
 }
 
-int	calculate_cost(t_stack *src, t_stack *dest, t_node *current_src, int tab[3])
+int	calculate_cost(t_stack *src, t_stack *dest, t_node *current_src)
 {
-	int		lowest_cost;
-	t_node	*current_dest;
+	int			lowest_cost;
+	t_node		*current_dest;
 
 	if (current_src->cost != INT_MAX)
 		return (current_src->cost);
 	lowest_cost = INT_MAX;
 	current_dest = dest->head;
-	if (check_three_biggest(tab, current_src->value))
-		return (INT_MAX);
 	while (current_dest && current_dest->next)
 	{
 		if (is_new_min_max(current_src->value, dest))
@@ -85,7 +76,7 @@ int	calculate_cost(t_stack *src, t_stack *dest, t_node *current_src, int tab[3])
 			return (current_src->cost = current_src->cost, current_src->cost);
 		}
 		set_cost_target(src, dest, current_src, current_dest);
-		if (current_src->cost > 0 && current_src->cost <= 2)
+		if (current_src->cost <= 2)
 			return (current_src->cost = current_src->cost, current_src->cost);
 		if (current_src->cost < lowest_cost)
 			lowest_cost = current_src->cost;
@@ -95,7 +86,7 @@ int	calculate_cost(t_stack *src, t_stack *dest, t_node *current_src, int tab[3])
 	return (lowest_cost);
 }
 
-t_node	*find_lowest_cost(t_stack *src, t_stack *dest, int tab[3])
+t_node	*find_lowest_cost(t_stack *src, t_stack *dest)
 {
 	t_node	*current_src;
 	t_node	*lowest_cost_node;
@@ -103,17 +94,12 @@ t_node	*find_lowest_cost(t_stack *src, t_stack *dest, int tab[3])
 	int		current_cost;
 
 	current_src = src->head;
-	while (current_src)
-	{
-		current_src->cost = INT_MAX;
-		current_src = current_src->next;
-	}
-	current_src = src->head;
 	lowest_cost_node = NULL;
 	lowest_cost = INT_MAX;
 	while (current_src)
 	{
-		current_cost = calculate_cost(src, dest, current_src, tab);
+		current_src->cost = INT_MAX;
+		current_cost = calculate_cost(src, dest, current_src);
 		if (current_cost < lowest_cost)
 		{
 			lowest_cost = current_cost;

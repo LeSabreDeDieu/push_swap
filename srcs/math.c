@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:44:42 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/08 14:40:01 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/04/02 16:21:25 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_node	*max_of_stack(t_stack *stack)
 
 bool	is_new_min_max(int value, t_stack *stack)
 {
-	if (value < min_of_stack(stack)->value
-		|| value > max_of_stack(stack)->value)
+	if (value < stack->min->value
+		|| value > stack->max->value)
 		return (true);
 	return (false);
 }

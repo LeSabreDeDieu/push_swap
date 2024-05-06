@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:28:35 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/14 12:55:35 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/04/02 16:18:39 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 void	push_stack(t_stack *src, t_stack *dest)
 {
-	t_node	*tmp;
-
-	if (!src)
+	if (!src->head)
 		return ;
-	push_front(dest, new_node(src->head->value));
-	if (src->head->next == NULL)
-		tmp = NULL;
+	if (dest->max == NULL || dest->min == NULL)
+	{
+		dest->max = src->head;
+		dest->min = src->head;
+	}
 	else
-		tmp = src->head->next;
-	free(src->head);
-	src->head = tmp;
-	src->size--;
+	{
+		if (src->head->value < dest->min->value)
+			dest->min = src->head;
+		if (src->head->value > dest->max->value)
+			dest->max = src->head;
+	}
+	push_front(src, dest);
+	src->min = min_of_stack(src);
+	src->max = max_of_stack(src);
 	init_pos(src);
 	init_pos(dest);
 }

@@ -6,7 +6,7 @@
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:35:01 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/13 12:37:05 by sgabsi           ###   ########.fr       */
+/*   Updated: 2024/04/02 15:34:04 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	short_sort(t_stack *stack)
 	t_node	*max;
 	int		size;
 
-	max = max_of_stack(stack);
+	max = stack->max;
 	size = stack->size;
 	if (stack->head->value == max->value && size > 2)
 		rotate(stack, NULL, 'a');

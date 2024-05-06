@@ -22,5 +22,6 @@ t_node	*new_node(int content)
 	new->value = content;
 	new->next = NULL;
 	new->prev = NULL;
+	new->cost = INT_MAX;
 	return (new);
 }

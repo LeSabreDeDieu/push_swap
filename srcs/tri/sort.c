@@ -5,80 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgabsi <sgabsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:54:54 by sgabsi            #+#    #+#             */
-/*   Updated: 2024/03/14 12:57:54 by sgabsi           ###   ########.fr       */
+/*   Created: 2024/03/22 15:49:14 by sgabsi            #+#    #+#             */
+/*   Updated: 2024/04/02 16:28:02 by sgabsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static void	moov_node(t_stack *src, t_stack *dest, t_node *node)
+static void	moov_node(t_stack *a, t_stack *b, t_node *node)
 {
-	while (src->head != node && dest->head != node->target_node
+	while (b->head != node && a->head != node->target_node
 		&& node->top_of_med == node->target_node->top_of_med
 		&& node->cost-- > 1)
 	{
 		if (node->top_of_med && node->target_node->top_of_med)
-			rotate(src, dest, 'r');
+			rotate(a, b, 'r');
 		else if (!(node->top_of_med || node->target_node->top_of_med))
-			rev_rotate(src, dest, 'r');
+			rev_rotate(a, b, 'r');
 	}
-	while (src->head != node && node->cost-- > 1)
+	while (b->head != node && node->cost-- > 1)
 	{
 		if (node->top_of_med)
-			rotate(src, dest, src->name);
-		else if (!(node->top_of_med))
-			rev_rotate(src, dest, src->name);
-	}
-	while (dest->head != node->target_node && node->cost-- > 1)
-	{
-		if (node->target_node->top_of_med)
-			rotate(src, dest, dest->name);
-		else if (!(node->target_node->top_of_med))
-			rev_rotate(src, dest, dest->name);
-	}
-}
-
-static void	traitment(t_stack *a, t_stack *b, int tab[3])
-{
-	t_node	*lowest;
-
-	while (a->size > 3)
-	{
-		lowest = find_lowest_cost(a, b, tab);
-		if (lowest != b->head && lowest != b->tail)
-			moov_node(a, b, lowest);
-		push(a, b, b->name);
-	}
-	while (b->head && !is_sorted_descending(b))
-	{
-		if (max_of_stack(b)->top_of_med)
 			rotate(a, b, 'b');
-		else
+		else if (!(node->top_of_med))
 			rev_rotate(a, b, 'b');
 	}
-	short_sort(a);
-	while (b->head)
-		push(a, b, a->name);
+	while (a->head != node->target_node && node->cost-- > 1)
+	{
+		if (node->target_node->top_of_med)
+			rotate(a, b, 'a');
+		else if (!(node->target_node->top_of_med))
+			rev_rotate(a, b, 'a');
+	}
 }
 
 void	sort(t_stack *a, t_stack *b)
 {
-	size_t	i;
-	int		three_biggest[3];
+	t_node	*lowest;
 
-	i = 0;
-	get_three_biggest(three_biggest, a);
-	while (a->size > 3 && i < 2)
+	create_chunk(a, b);
+	short_sort(a);
+	a->min = min_of_stack(a);
+	a->max = max_of_stack(a);
+	while (b->head)
 	{
-		if (check_three_biggest(three_biggest, a->head->value))
-		{
-			rotate(a, b, a->name);
-			continue ;
-		}
-		push(a, b, b->name);
-		i++;
+		lowest = find_lowest_cost(b, a);
+		if (lowest != a->head && lowest != a->tail)
+			moov_node(a, b, lowest);
+		push(a, b, 'a');
 	}
-	traitment(a, b, three_biggest);
+	while (a->head != a->min)
+	{
+		if (a->min->top_of_med)
+			rotate(a, b, 'a');
+		else
+			rev_rotate(a, b, 'a');
+	}
 }
