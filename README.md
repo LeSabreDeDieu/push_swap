@@ -16,3 +16,23 @@
 	<img alt="Static Badge" src="https://img.shields.io/badge/Outstanding-1-blue?style=none&logo=42">
 	<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/LeSabreDeDieu/push_swap?style=none&logo=github">
 </p>
+
+## Description
+Push Swap is a project that aims to sort a list of integers using two stacks and a limited set of instructions.
+
+## Installation
+Clone this repository and compile the project:
+```bash
+git clone https://github.com/LeSabreDeDieu/push_swap.git
+cd push_swap
+make
+```
+##Usage
+To use the program, run the following command with an unsorted list of integers :
+```bash
+./push_swap <list of integers>
+```
+or
+```bash
+./push_swap "<list of integers>"
+```
